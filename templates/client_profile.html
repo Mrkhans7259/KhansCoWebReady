@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+</head>
+<body style="font-family:Arial; padding:30px; background:#f4f6f8;">
+
+<h1>👤 My Profile</h1>
+
+{% if profile %}
+<table border="1" cellpadding="10" cellspacing="0" style="background:white; border-collapse:collapse;">
+    <tr><th>Client Code</th><td>{{ profile[1] }}</td></tr>
+    <tr><th>Client Name</th><td>{{ profile[2] }}</td></tr>
+    <tr><th>GSTIN</th><td>{{ profile[3] }}</td></tr>
+    <tr><th>Mobile</th><td>{{ profile[4] }}</td></tr>
+    <tr><th>Email</th><td>{{ profile[5] }}</td></tr>
+    <tr><th>Assigned Staff</th><td>{{ profile[6] }}</td></tr>
+    <tr><th>Outstanding Fee</th><td>₹{{ outstanding_fee }}</td></tr>
+</table>
+{% else %}
+<p>Profile not found.</p>
+{% endif %}
+
+<br>
+<a href="/client-portal">Back to Client Portal</a>
+
+</body>
+</html>

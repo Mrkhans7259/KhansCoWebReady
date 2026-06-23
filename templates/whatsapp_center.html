@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WhatsApp Reminder Center</title>
+</head>
+<body style="font-family:Arial; margin:0; background:#f4f6f8;">
+
+<div style="display:flex; min-height:100vh;">
+
+    <div style="width:260px; background:#1f2937; color:white; padding:20px;">
+        <h2>Khans & Co.</h2>
+        <p>Compliance Manager</p>
+        <hr>
+        <p><a href="/dashboard" style="color:white; text-decoration:none;">🏠 Dashboard</a></p>
+        <p><a href="/clients" style="color:white; text-decoration:none;">👥 Client Master</a></p>
+        <p><a href="/fee-tracker" style="color:white; text-decoration:none;">💰 Fee Tracker</a></p>
+        <p><a href="/client-ledger" style="color:white; text-decoration:none;">📄 Client Ledger</a></p>
+        <p><a href="/gst-status" style="color:white; text-decoration:none;">📊 GST Compliance</a></p>
+        <p><a href="/invoice-generator" style="color:white; text-decoration:none;">🧾 Invoice Generator</a></p>
+        <p><a href="/users" style="color:white; text-decoration:none;">👤 User Management</a></p>
+        <p><a href="/reports" style="color:white; text-decoration:none;">📈 Reports</a></p>
+        <p><a href="/whatsapp-center" style="color:white; text-decoration:none;">💬 WhatsApp Center</a></p>
+    </div>
+
+    <div style="flex:1; padding:30px;">
+        <h1>💬 WhatsApp Reminder Center</h1>
+
+        <h2>📊 GST Pending Reminders</h2>
+
+        <table border="1" cellpadding="8" cellspacing="0" style="width:100%; background:white; border-collapse:collapse;">
+            <tr>
+                <th>Client</th>
+                <th>Mobile</th>
+                <th>FY</th>
+                <th>Month</th>
+                <th>GSTR-1</th>
+                <th>GSTR-3B</th>
+                <th>WhatsApp</th>
+            </tr>
+
+            {% for row in gst_pending %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td>
+                    <a target="_blank"
+                       href="https://wa.me/91{{ row[1] }}?text=Dear {{ row[0] }}, your GST return for {{ row[3] }} {{ row[2] }} is pending. Kindly contact Khans & Co.">
+                        Send GST Reminder
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>💰 Fee Pending Reminders</h2>
+
+        <table border="1" cellpadding="8" cellspacing="0" style="width:100%; background:white; border-collapse:collapse;">
+            <tr>
+                <th>Client</th>
+                <th>Mobile</th>
+                <th>FY</th>
+                <th>Month</th>
+                <th>Outstanding</th>
+                <th>WhatsApp</th>
+            </tr>
+
+            {% for row in fee_pending %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>₹{{ row[4] }}</td>
+                <td>
+                    <a target="_blank"
+                       href="https://wa.me/91{{ row[1] }}?text=Dear {{ row[0] }}, your outstanding fee balance is Rs. {{ row[4] }} for {{ row[3] }} {{ row[2] }}. Kindly clear the payment. - Khans & Co.">
+                        Send Fee Reminder
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

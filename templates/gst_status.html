@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GST Compliance</title>
+</head>
+<body style="font-family:Arial; margin:0; background:#f4f6f8;">
+
+<div style="display:flex; min-height:100vh;">
+
+    <div style="width:260px; background:#1f2937; color:white; padding:20px;">
+        <h2>Khans & Co.</h2>
+        <p>Compliance Manager</p>
+        <hr>
+        <p><a href="/dashboard" style="color:white; text-decoration:none;">🏠 Dashboard</a></p>
+        <p><a href="/clients" style="color:white; text-decoration:none;">👥 Client Master</a></p>
+        <p><a href="/fee-tracker" style="color:white; text-decoration:none;">💰 Fee Tracker</a></p>
+        <p><a href="/client-ledger" style="color:white; text-decoration:none;">📄 Client Ledger</a></p>
+        <p><a href="/gst-status" style="color:white; text-decoration:none;">📊 GST Compliance</a></p>
+    </div>
+
+    <div style="flex:1; padding:30px;">
+        <h1>📊 GST Compliance</h1>
+
+        <form method="GET" action="/gst-status">
+            <input
+                type="text"
+                name="search"
+                value="{{ search }}"
+                placeholder="Search Client / Month / FY / Status"
+                style="width:350px; padding:10px; margin-bottom:15px;"
+            >
+
+            <button type="submit" style="padding:10px 20px;">
+                🔍 Search
+            </button>
+
+            <a href="/gst-status" style="margin-left:10px;">Show All</a>
+        </form>
+
+        <form method="POST" style="background:white; padding:20px; border-radius:8px; margin-bottom:20px;">
+            <h3>Add GST Status</h3>
+
+            <select name="client_id" required style="padding:10px; width:220px;">
+                {% for client in clients %}
+                    <option value="{{ client[0] }}">{{ client[1] }}</option>
+                {% endfor %}
+            </select>
+
+            <input name="financial_year" placeholder="FY e.g. 2025-26" value="2025-26" required style="padding:10px;">
+            <input name="month" placeholder="Month" required style="padding:10px;">
+
+            <select name="gstr1_status" style="padding:10px;">
+                <option>Pending</option>
+                <option>Filed</option>
+                <option>Not Applicable</option>
+            </select>
+
+            <select name="gstr3b_status" style="padding:10px;">
+                <option>Pending</option>
+                <option>Filed</option>
+                <option>Not Applicable</option>
+            </select>
+
+            <input name="arn" placeholder="ARN" style="padding:10px;">
+            <input name="filing_date" placeholder="Filing Date" style="padding:10px;">
+
+            <button type="submit" style="padding:10px 20px;">Save GST</button>
+        </form>
+
+        <table border="1" cellpadding="10" cellspacing="0" style="width:100%; background:white; border-collapse:collapse;">
+            <tr>
+                <th>ID</th>
+                <th>Client</th>
+                <th>FY</th>
+                <th>Month</th>
+                <th>GSTR-1</th>
+                <th>GSTR-3B</th>
+                <th>ARN</th>
+                <th>Filing Date</th>
+                <th>Action</th>
+            </tr>
+
+            {% for row in gst_rows %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td>{{ row[6] }}</td>
+                <td>{{ row[7] }}</td>
+                <td>
+                    <a href="/delete-gst/{{ row[0] }}"
+                       onclick="return confirm('Delete this GST record?')"
+                       style="background:red; color:white; padding:5px 10px; text-decoration:none; border-radius:4px;">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

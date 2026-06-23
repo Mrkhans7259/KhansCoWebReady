@@ -12,34 +12,72 @@
         <p>Compliance Manager</p>
         <hr>
 
-        <p><a href="/dashboard" style="color:white; text-decoration:none;">🏠 Dashboard</a></p>
-        <p><a href="/clients" style="color:white; text-decoration:none;">👥 Client Master</a></p>
-        <p><a href="/gst-status" style="color:white; text-decoration:none;">📊 GST Compliance</a></p>
-        <p><a href="/fee-tracker" style="color:white; text-decoration:none;">💰 Fee Tracker</a></p>
-        <p><a href="/" style="color:white; text-decoration:none;">🚪 Logout</a></p>
+        <p><a href="/dashboard" style="color:white;">🏠 Dashboard</a></p>
+        <p><a href="/clients" style="color:white;">👥 Client Master</a></p>
+        <p><a href="/fee-tracker" style="color:white;">💰 Fee Tracker</a></p>
+        <p><a href="/client-ledger" style="color:white;">📄 Client Ledger</a></p>
+        <p><a href="/gst-status" style="color:white;">📊 GST Compliance</a></p>
+        <p><a href="/invoice-generator" style="color:white;">🧾 Invoice Generator</a></p>
+        <p><a href="/reports" style="color:white;">📈 Reports</a></p>
+        <p><a href="/notifications" style="color:white;">🔔 Notifications</a></p>
+        <p><a href="/admin-tickets" style="color:white;">🎫 Tickets</a></p>
+        <p><a href="/admin-documents" style="color:white;">📤 Documents</a></p>
+        <p><a href="/file-center" style="color:white;">📂 File Center</a></p>
+        <p><a href="/status-tracker" style="color:white;">📊 Status Tracker</a></p>
+        <p><a href="/users" style="color:white;">👤 Users</a></p>
+        <p><a href="/backup-center" style="color:white;">🔄 Backup</a></p>
+        <p><a href="/logout" style="color:white;">🚪 Logout</a></p>
     </div>
 
-    <div style="flex:1; padding:40px;">
+    <div style="flex:1; padding:30px;">
         <h1>🏠 Dashboard</h1>
 
-        <div style="display:flex; gap:25px; flex-wrap:wrap;">
+        <h2>🔔 Notification Summary</h2>
 
-            <div style="background:white; padding:25px; width:260px; border-radius:10px;">
+        <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:25px;">
+
+            <div style="background:white; padding:20px; width:220px; border-radius:10px;">
+                <h3>🔔 Unread Notifications</h3>
+                <h1>{{ unread_notifications }}</h1>
+            </div>
+
+            <div style="background:white; padding:20px; width:220px; border-radius:10px;">
+                <h3>🎫 Open Tickets</h3>
+                <h1>{{ open_tickets }}</h1>
+            </div>
+
+            <div style="background:white; padding:20px; width:220px; border-radius:10px;">
+                <h3>📤 Uploaded Documents</h3>
+                <h1>{{ uploaded_documents }}</h1>
+            </div>
+
+            <div style="background:white; padding:20px; width:220px; border-radius:10px;">
+                <h3>👤 Client Registrations</h3>
+                <h1>{{ registered_clients }}</h1>
+            </div>
+
+        </div>
+
+        <h2>📊 Business Summary</h2>
+
+        <div style="display:flex; gap:20px; flex-wrap:wrap;">
+
+            <div style="background:white; padding:20px; width:220px; border-radius:10px;">
                 <h3>👥 Total Clients</h3>
                 <h1>{{ total_clients }}</h1>
             </div>
 
-            <div style="background:white; padding:25px; width:260px; border-radius:10px;">
+            <div style="background:white; padding:20px; width:220px; border-radius:10px;">
                 <h3>📊 GST Records</h3>
                 <h1>{{ total_gst }}</h1>
             </div>
 
-            <div style="background:white; padding:25px; width:260px; border-radius:10px;">
+            <div style="background:white; padding:20px; width:220px; border-radius:10px;">
                 <h3>📄 GSTR-1 Pending</h3>
                 <h1>{{ pending_gstr1 }}</h1>
             </div>
 
-            <div style="background:white; padding:25px; width:260px; border-radius:10px;">
+            <div style="background:white; padding:20px; width:220px; border-radius:10px;">
                 <h3>📄 GSTR-3B Pending</h3>
                 <h1>{{ pending_gstr3b }}</h1>
             </div>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Work Progress</title>
+</head>
+<body style="font-family:Arial; padding:30px;">
+
+<h1>Work Progress</h1>
+
+<form method="POST">
+    <p>Select Client</p>
+    <select name="client_id" required>
+        {% for client in clients %}
+            <option value="{{ client[0] }}">{{ client[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <p>Work Title</p>
+    <input name="work_title" placeholder="Example: GST Filing June" required>
+
+    <p>Status</p>
+    <select name="status">
+        <option>Pending</option>
+        <option>In Progress</option>
+        <option>Completed</option>
+        <option>Need Documents</option>
+    </select>
+
+    <p>Remarks</p>
+    <input name="remarks" style="width:400px;">
+
+    <br><br>
+    <button type="submit">Save Progress</button>
+</form>
+
+<br>
+<a href="/dashboard">Back to Dashboard</a>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client Tickets</title>
+</head>
+<body style="font-family:Arial; padding:30px;">
+
+<h1>Support / Query Tickets</h1>
+
+<form method="POST">
+    <p>Subject</p>
+    <input name="subject" required style="width:400px; padding:8px;">
+
+    <p>Message</p>
+    <textarea name="message" required style="width:400px; height:100px; padding:8px;"></textarea>
+
+    <br><br>
+    <button type="submit">Submit Ticket</button>
+</form>
+
+<h2>My Tickets</h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>Subject</th>
+        <th>Message</th>
+        <th>Status</th>
+        <th>Date</th>
+    </tr>
+
+    {% for ticket in tickets %}
+    <tr>
+        <td>{{ ticket[0] }}</td>
+        <td>{{ ticket[1] }}</td>
+        <td>{{ ticket[2] }}</td>
+        <td>{{ ticket[3] }}</td>
+        <td>{{ ticket[4] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a href="/client-portal">Back to Client Portal</a>
+
+</body>
+</html>

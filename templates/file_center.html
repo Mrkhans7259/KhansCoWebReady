@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Center</title>
+</head>
+<body style="font-family:Arial; padding:30px; background:#f4f6f8;">
+
+<h1>📂 Client File Center</h1>
+
+<form method="POST" enctype="multipart/form-data" style="background:white; padding:20px; border-radius:8px;">
+
+    <p>Select Client</p>
+    <select name="client_id" required>
+        {% for client in clients %}
+            <option value="{{ client[0] }}">{{ client[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <p>File Title</p>
+    <input name="file_title" required style="width:400px; padding:8px;">
+
+    <p>File Type</p>
+    <select name="file_type">
+        <option>GST Return</option>
+        <option>Income Tax Return</option>
+        <option>Audit Report</option>
+        <option>Invoice</option>
+        <option>ROC Filing</option>
+        <option>Other</option>
+    </select>
+
+    <p>Select File</p>
+    <input type="file" name="client_file" required>
+
+    <br><br>
+    <button type="submit">Upload File for Client</button>
+
+</form>
+
+<h2>Uploaded Files</h2>
+
+<table border="1" cellpadding="10" cellspacing="0" style="background:white; border-collapse:collapse; width:100%;">
+    <tr>
+        <th>ID</th>
+        <th>Client</th>
+        <th>Title</th>
+        <th>File</th>
+        <th>Type</th>
+        <th>Date</th>
+        <th>Open</th>
+    </tr>
+
+    {% for file in files %}
+    <tr>
+        <td>{{ file[0] }}</td>
+        <td>{{ file[1] }}</td>
+        <td>{{ file[2] }}</td>
+        <td>{{ file[3] }}</td>
+        <td>{{ file[4] }}</td>
+        <td>{{ file[5] }}</td>
+        <td><a href="/client-files/{{ file[3] }}" target="_blank">Open</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a href="/dashboard">Back to Dashboard</a>
+
+</body>
+</html>

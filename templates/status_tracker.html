@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client Status Tracker</title>
+</head>
+<body style="font-family:Arial; padding:30px; background:#f4f6f8;">
+
+<h1>📊 Client Status Tracker</h1>
+
+<form method="POST" style="background:white; padding:20px; border-radius:8px; margin-bottom:20px;">
+
+    <p>Select Client</p>
+    <select name="client_id" required>
+        {% for client in clients %}
+            <option value="{{ client[0] }}">{{ client[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <p>GST Status</p>
+    <select name="gst_status">
+        <option>Pending</option>
+        <option>In Progress</option>
+        <option>Completed</option>
+        <option>Need Documents</option>
+        <option>Not Applicable</option>
+    </select>
+
+    <p>Income Tax Status</p>
+    <select name="income_tax_status">
+        <option>Pending</option>
+        <option>In Progress</option>
+        <option>Completed</option>
+        <option>Need Documents</option>
+        <option>Not Applicable</option>
+    </select>
+
+    <p>TDS Status</p>
+    <select name="tds_status">
+        <option>Pending</option>
+        <option>In Progress</option>
+        <option>Completed</option>
+        <option>Need Documents</option>
+        <option>Not Applicable</option>
+    </select>
+
+    <p>Audit Status</p>
+    <select name="audit_status">
+        <option>Pending</option>
+        <option>In Progress</option>
+        <option>Completed</option>
+        <option>Need Documents</option>
+        <option>Not Applicable</option>
+    </select>
+
+    <p>ROC Status</p>
+    <select name="roc_status">
+        <option>Pending</option>
+        <option>In Progress</option>
+        <option>Completed</option>
+        <option>Need Documents</option>
+        <option>Not Applicable</option>
+    </select>
+
+    <p>Remarks</p>
+    <input name="remarks" style="width:500px; padding:8px;">
+
+    <br><br>
+    <button type="submit">Save Status</button>
+
+</form>
+
+<h2>All Client Status</h2>
+
+<table border="1" cellpadding="10" cellspacing="0" style="background:white; border-collapse:collapse; width:100%;">
+    <tr>
+        <th>ID</th>
+        <th>Client</th>
+        <th>GST</th>
+        <th>Income Tax</th>
+        <th>TDS</th>
+        <th>Audit</th>
+        <th>ROC</th>
+        <th>Remarks</th>
+        <th>Updated</th>
+    </tr>
+
+    {% for row in status_rows %}
+    <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+        <td>{{ row[3] }}</td>
+        <td>{{ row[4] }}</td>
+        <td>{{ row[5] }}</td>
+        <td>{{ row[6] }}</td>
+        <td>{{ row[7] }}</td>
+        <td>{{ row[8] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a href="/dashboard">Back to Dashboard</a>
+
+</body>
+</html>

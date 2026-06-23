@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Tickets</title>
+</head>
+<body style="font-family:Arial; padding:30px;">
+
+<h1>Client Support Tickets</h1>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>Client</th>
+        <th>Subject</th>
+        <th>Message</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Action</th>
+    </tr>
+
+    {% for ticket in tickets %}
+    <tr>
+        <td>{{ ticket[0] }}</td>
+        <td>{{ ticket[1] }}</td>
+        <td>{{ ticket[2] }}</td>
+        <td>{{ ticket[3] }}</td>
+        <td>{{ ticket[4] }}</td>
+        <td>{{ ticket[5] }}</td>
+        <td>
+            <a href="/update-ticket/{{ ticket[0] }}/Open">Open</a> |
+            <a href="/update-ticket/{{ ticket[0] }}/In Progress">In Progress</a> |
+            <a href="/update-ticket/{{ ticket[0] }}/Closed">Closed</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a href="/dashboard">Back to Dashboard</a>
+
+</body>
+</html>

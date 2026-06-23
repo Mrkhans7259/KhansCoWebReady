@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client Portal</title>
+</head>
+<body style="font-family:Arial; padding:30px; background:#f4f6f8;">
+
+<h1>Client Portal</h1>
+<h3>Welcome, {{ client_name }}</h3>
+
+<hr>
+
+<h2>Menu</h2>
+
+<p><a href="/client-profile">👤 My Profile</a></p>
+<p><a href="/upload-document">📤 Upload Documents</a></p>
+<p><a href="/client-downloads">📥 My Download Files</a></p>
+<p><a href="/client-tickets">🎫 Support / Query Tickets</a></p>
+<p><a href="/client-logout">🚪 Logout</a></p>
+
+<hr>
+
+<h2>📊 My Work Status</h2>
+
+{% if status %}
+<table border="1" cellpadding="10" cellspacing="0">
+    <tr>
+        <th>GST</th>
+        <th>Income Tax</th>
+        <th>TDS</th>
+        <th>Audit</th>
+        <th>ROC</th>
+        <th>Remarks</th>
+        <th>Updated</th>
+    </tr>
+    <tr>
+        <td>{{ status[0] }}</td>
+        <td>{{ status[1] }}</td>
+        <td>{{ status[2] }}</td>
+        <td>{{ status[3] }}</td>
+        <td>{{ status[4] }}</td>
+        <td>{{ status[5] }}</td>
+        <td>{{ status[6] }}</td>
+    </tr>
+</table>
+{% else %}
+<p>No status updated yet.</p>
+{% endif %}
+
+<hr>
+
+<h2>My Work Progress</h2>
+
+<table border="1" cellpadding="10" cellspacing="0">
+    <tr>
+        <th>Work</th>
+        <th>Status</th>
+        <th>Remarks</th>
+        <th>Updated</th>
+    </tr>
+
+    {% for row in progress %}
+    <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+        <td>{{ row[3] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<hr>
+
+<h2>My Uploaded Documents</h2>
+
+<table border="1" cellpadding="10" cellspacing="0">
+    <tr>
+        <th>Document</th>
+        <th>File</th>
+        <th>Uploaded</th>
+    </tr>
+
+    {% for doc in documents %}
+    <tr>
+        <td>{{ doc[0] }}</td>
+        <td>{{ doc[1] }}</td>
+        <td>{{ doc[2] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reports</title>
+</head>
+<body style="font-family:Arial; margin:0; background:#f4f6f8;">
+
+<div style="display:flex; min-height:100vh;">
+
+    <div style="width:260px; background:#1f2937; color:white; padding:20px;">
+        <h2>Khans & Co.</h2>
+        <p>Compliance Manager</p>
+        <hr>
+        <p><a href="/dashboard" style="color:white; text-decoration:none;">🏠 Dashboard</a></p>
+        <p><a href="/clients" style="color:white; text-decoration:none;">👥 Client Master</a></p>
+        <p><a href="/fee-tracker" style="color:white; text-decoration:none;">💰 Fee Tracker</a></p>
+        <p><a href="/client-ledger" style="color:white; text-decoration:none;">📄 Client Ledger</a></p>
+        <p><a href="/gst-status" style="color:white; text-decoration:none;">📊 GST Compliance</a></p>
+        <p><a href="/invoice-generator" style="color:white; text-decoration:none;">🧾 Invoice Generator</a></p>
+        <p><a href="/users" style="color:white; text-decoration:none;">👤 User Management</a></p>
+        <p><a href="/reports" style="color:white; text-decoration:none;">📈 Reports</a></p>
+    </div>
+
+    <div style="flex:1; padding:30px;">
+        <h1>📈 Reports Dashboard</h1>
+
+        <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:25px;">
+            <div style="background:white; padding:20px; border-radius:8px; width:210px;">
+                <h3>Total Clients</h3>
+                <h2>{{ summary.total_clients }}</h2>
+            </div>
+
+            <div style="background:white; padding:20px; border-radius:8px; width:210px;">
+                <h3>GST Records</h3>
+                <h2>{{ summary.total_gst }}</h2>
+            </div>
+
+            <div style="background:white; padding:20px; border-radius:8px; width:210px;">
+                <h3>Outstanding Fees</h3>
+                <h2>₹{{ summary.outstanding_fee }}</h2>
+            </div>
+
+            <div style="background:white; padding:20px; border-radius:8px; width:210px;">
+                <h3>Invoice Total</h3>
+                <h2>₹{{ summary.invoice_total }}</h2>
+            </div>
+        </div>
+
+        <h2>💰 Outstanding Fee Report</h2>
+        <table border="1" cellpadding="8" cellspacing="0" style="width:100%; background:white; border-collapse:collapse;">
+            <tr>
+                <th>Client</th>
+                <th>Mobile</th>
+                <th>FY</th>
+                <th>Month</th>
+                <th>Outstanding</th>
+            </tr>
+
+            {% for row in outstanding_fees %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>📊 GST Pending Report</h2>
+        <table border="1" cellpadding="8" cellspacing="0" style="width:100%; background:white; border-collapse:collapse;">
+            <tr>
+                <th>Client</th>
+                <th>Mobile</th>
+                <th>FY</th>
+                <th>Month</th>
+                <th>GSTR-1</th>
+                <th>GSTR-3B</th>
+            </tr>
+
+            {% for row in gst_pending %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>🧾 Invoice Report</h2>
+        <table border="1" cellpadding="8" cellspacing="0" style="width:100%; background:white; border-collapse:collapse;">
+            <tr>
+                <th>Invoice No</th>
+                <th>Date</th>
+                <th>Client</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>GST</th>
+                <th>Total</th>
+            </tr>
+
+            {% for row in invoice_report %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td>{{ row[6] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

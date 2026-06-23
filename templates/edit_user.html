@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add User</title>
+    <title>Edit User</title>
 </head>
 <body style="font-family:Arial; background:#f4f6f8;">
 
 <div style="width:600px; margin:40px auto; background:white; padding:30px; border-radius:10px;">
 
-    <h1>➕ Add User</h1>
+    <h1>✏️ Edit User</h1>
 
     <form method="POST">
 
@@ -15,15 +15,15 @@
         <input
             type="text"
             name="username"
+            value="{{ user[1] }}"
             required
             style="width:100%; padding:10px;"
         >
 
-        <p>Password</p>
+        <p>New Password (Leave Blank to Keep Existing)</p>
         <input
             type="password"
             name="password"
-            required
             style="width:100%; padding:10px;"
         >
 
@@ -32,8 +32,8 @@
             name="role"
             style="width:100%; padding:10px;"
         >
-            <option>Admin</option>
-            <option>User</option>
+            <option {% if user[2] == 'Admin' %}selected{% endif %}>Admin</option>
+            <option {% if user[2] == 'User' %}selected{% endif %}>User</option>
         </select>
 
         <br><br>
@@ -42,7 +42,7 @@
             type="submit"
             style="padding:10px 20px;"
         >
-            Save User
+            Update User
         </button>
 
         <a href="/users">Cancel</a>

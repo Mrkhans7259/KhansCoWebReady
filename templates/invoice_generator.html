@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice Generator</title>
+</head>
+<body style="font-family:Arial; margin:0; background:#f4f6f8;">
+
+<div style="display:flex; min-height:100vh;">
+
+    <div style="width:260px; background:#1f2937; color:white; padding:20px;">
+        <h2>Khans & Co.</h2>
+        <p>Compliance Manager</p>
+        <hr>
+        <p><a href="/dashboard" style="color:white; text-decoration:none;">🏠 Dashboard</a></p>
+        <p><a href="/clients" style="color:white; text-decoration:none;">👥 Client Master</a></p>
+        <p><a href="/fee-tracker" style="color:white; text-decoration:none;">💰 Fee Tracker</a></p>
+        <p><a href="/client-ledger" style="color:white; text-decoration:none;">📄 Client Ledger</a></p>
+        <p><a href="/gst-status" style="color:white; text-decoration:none;">📊 GST Compliance</a></p>
+        <p><a href="/invoice-generator" style="color:white; text-decoration:none;">🧾 Invoice Generator</a></p>
+    </div>
+
+    <div style="flex:1; padding:30px;">
+        <h1>🧾 Invoice Generator</h1>
+
+        <form method="POST" style="background:white; padding:20px; border-radius:8px; margin-bottom:20px;">
+            <h3>Create Invoice</h3>
+
+            <input name="invoice_no" value="{{ invoice_no }}" required style="padding:10px; width:180px;">
+
+            <input name="invoice_date" value="{{ today }}" required style="padding:10px; width:150px;">
+
+            <select name="client_id" required style="padding:10px; width:250px;">
+                {% for client in clients %}
+                    <option value="{{ client[0] }}">{{ client[1] }}</option>
+                {% endfor %}
+            </select>
+
+            <input name="description" placeholder="Service Description" required style="padding:10px; width:300px;">
+
+            <input name="amount" placeholder="Amount" required style="padding:10px; width:120px;">
+
+            <input name="gst_rate" placeholder="GST %" value="18" required style="padding:10px; width:80px;">
+
+            <button type="submit" style="padding:10px 20px;">Save Invoice</button>
+        </form>
+
+        <table border="1" cellpadding="10" cellspacing="0" style="width:100%; background:white; border-collapse:collapse;">
+            <tr>
+                <th>ID</th>
+                <th>Invoice No</th>
+                <th>Date</th>
+                <th>Client</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>GST %</th>
+                <th>GST Amount</th>
+                <th>Total</th>
+            </tr>
+
+            {% for invoice in invoices %}
+            <tr>
+                <td>{{ invoice[0] }}</td>
+                <td>{{ invoice[1] }}</td>
+                <td>{{ invoice[2] }}</td>
+                <td>{{ invoice[3] }}</td>
+                <td>{{ invoice[4] }}</td>
+                <td>{{ invoice[5] }}</td>
+                <td>{{ invoice[6] }}</td>
+                <td>{{ invoice[7] }}</td>
+                <td>{{ invoice[8] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Client Profile</title>
+</head>
+<body style="font-family:Arial; padding:30px; background:#f4f6f8;">
+
+<h1>✏️ Edit Client Profile</h1>
+
+{% if profile %}
+<form method="POST" style="background:white; padding:20px; border-radius:8px; width:600px;">
+
+    <p>Client Code</p>
+    <input name="client_code" value="{{ profile[1] }}" required style="width:100%; padding:8px;">
+
+    <p>Client Name</p>
+    <input name="client_name" value="{{ profile[2] }}" required style="width:100%; padding:8px;">
+
+    <p>GSTIN</p>
+    <input name="gstin" value="{{ profile[3] }}" style="width:100%; padding:8px;">
+
+    <p>Mobile</p>
+    <input name="mobile" value="{{ profile[4] }}" style="width:100%; padding:8px;">
+
+    <p>Email</p>
+    <input name="email" value="{{ profile[5] }}" style="width:100%; padding:8px;">
+
+    <p>Assigned Staff</p>
+    <input name="assigned_staff" value="{{ profile[6] }}" style="width:100%; padding:8px;">
+
+    <br><br>
+    <button type="submit">Update Profile</button>
+
+</form>
+{% else %}
+<p>Client not found.</p>
+{% endif %}
+
+<br>
+<a href="/clients">Back to Clients</a>
+
+</body>
+</html>
