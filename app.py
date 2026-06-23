@@ -17,8 +17,8 @@ from database.client_portal_repository import ClientPortalRepository
 from database.ticket_repository import TicketRepository
 from database.status_repository import StatusRepository
 from database.file_center_repository import FileCenterRepository
-from database.profile_repository import ProfileRepository
 from database.notification_repository import NotificationRepository
+from database.profile_repository import ProfileRepository
 
 app = Flask(__name__)
 app.secret_key = "khansco_secret_key"
@@ -82,8 +82,14 @@ def dashboard():
 def clients():
     repo = ClientRepository()
     search = request.args.get("search", "")
+
     data = repo.search_clients(search) if search else repo.get_all_clients()
-    return render_template("clients.html", clients=data, search=search)
+
+    return render_template(
+        "clients.html",
+        clients=data,
+        search=search
+    )
 
 
 @app.route("/add-client", methods=["GET", "POST"])
@@ -120,13 +126,38 @@ def edit_client(client_id):
         )
         return redirect("/clients")
 
-    return render_template("edit_client.html", client=repo.get_client_by_id(client_id))
+    return render_template(
+        "edit_client.html",
+        client=repo.get_client_by_id(client_id)
+    )
 
 
 @app.route("/delete-client/<int:client_id>")
 def delete_client(client_id):
     ClientRepository().delete_client(client_id)
     return redirect("/clients")
+
+
+@app.route("/admin-profile/<int:client_id>", methods=["GET", "POST"])
+def admin_profile(client_id):
+    repo = ProfileRepository()
+
+    if request.method == "POST":
+        repo.update_client_profile(
+            client_id,
+            request.form["client_code"],
+            request.form["client_name"],
+            request.form["gstin"],
+            request.form["mobile"],
+            request.form["email"],
+            request.form["assigned_staff"]
+        )
+        return redirect("/clients")
+
+    return render_template(
+        "admin_profile.html",
+        profile=repo.get_client_profile(client_id)
+    )
 
 
 @app.route("/fee-tracker", methods=["GET", "POST"])
@@ -393,18 +424,7 @@ def client_login():
 
         return "<h2>Invalid Client Login</h2><a href='/client-login'>Try Again</a>"
 
-    return """
-    <h1>Client Login</h1>
-    <form method='post'>
-        Username:<br>
-        <input name='username'><br><br>
-        Password:<br>
-        <input type='password' name='password'><br><br>
-        <button type='submit'>Login</button>
-    </form>
-    <br>
-    <a href='/client-register'>Register New Client</a>
-    """
+    return render_template("client_login.html")
 
 
 @app.route("/client-portal")
@@ -421,6 +441,20 @@ def client_portal():
         documents=portal_repo.get_client_documents(session["client_id"]),
         progress=portal_repo.get_client_progress(session["client_id"]),
         status=status_repo.get_client_status(session["client_id"])
+    )
+
+
+@app.route("/client-profile")
+def client_profile():
+    if "client_id" not in session:
+        return redirect("/client-login")
+
+    repo = ProfileRepository()
+
+    return render_template(
+        "client_profile.html",
+        profile=repo.get_client_profile(session["client_id"]),
+        outstanding_fee=repo.get_outstanding_fee(session["client_id"])
     )
 
 
@@ -619,40 +653,7 @@ def client_files(filename):
         app.config["CLIENT_FILES_FOLDER"],
         filename
     )
-@app.route("/client-profile")
-def client_profile():
-    if "client_id" not in session:
-        return redirect("/client-login")
 
-    repo = ProfileRepository()
-
-    return render_template(
-        "client_profile.html",
-        profile=repo.get_client_profile(session["client_id"]),
-        outstanding_fee=repo.get_outstanding_fee(session["client_id"])
-    )
-
-
-@app.route("/admin-profile/<int:client_id>", methods=["GET", "POST"])
-def admin_profile(client_id):
-    repo = ProfileRepository()
-
-    if request.method == "POST":
-        repo.update_client_profile(
-            client_id,
-            request.form["client_code"],
-            request.form["client_name"],
-            request.form["gstin"],
-            request.form["mobile"],
-            request.form["email"],
-            request.form["assigned_staff"]
-        )
-        return redirect("/clients")
-
-    return render_template(
-        "admin_profile.html",
-        profile=repo.get_client_profile(client_id)
-    )
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5050))

@@ -1,34 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Client Register</title>
+    <title>Client Register - Khans & Co.</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body style="font-family:Arial; padding:30px;">
+<body class="login-body">
 
-<h1>Client Registration</h1>
+<div class="login-card">
+    <div class="logo-badge">KC</div>
+    <h1>Client Register</h1>
+    <p>Create your client portal account</p>
 
-<form method="POST">
-    <p>Client Name</p>
-    <input name="client_name" required>
+    <form method="POST">
+        <input name="client_name" placeholder="Client Name" required>
+        <input name="mobile" placeholder="Mobile Number" required>
+        <input name="email" placeholder="Email">
+        <input name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Register</button>
+    </form>
 
-    <p>Mobile</p>
-    <input name="mobile" required>
-
-    <p>Email</p>
-    <input name="email">
-
-    <p>Username</p>
-    <input name="username" required>
-
-    <p>Password</p>
-    <input type="password" name="password" required>
-
-    <br><br>
-    <button type="submit">Register</button>
-</form>
-
-<br>
-<a href="/">Back to Login</a>
+    <div class="login-links">
+        <a href="/">Admin Login</a>
+        <a href="/client-login">Client Login</a>
+    </div>
+</div>
 
 </body>
 </html>

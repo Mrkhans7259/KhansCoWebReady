@@ -1,28 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Profile</title>
+    <title>My Profile - Khans & Co.</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body style="font-family:Arial; padding:30px; background:#f4f6f8;">
+<body>
 
-<h1>👤 My Profile</h1>
+<div class="app-layout">
 
-{% if profile %}
-<table border="1" cellpadding="10" cellspacing="0" style="background:white; border-collapse:collapse;">
-    <tr><th>Client Code</th><td>{{ profile[1] }}</td></tr>
-    <tr><th>Client Name</th><td>{{ profile[2] }}</td></tr>
-    <tr><th>GSTIN</th><td>{{ profile[3] }}</td></tr>
-    <tr><th>Mobile</th><td>{{ profile[4] }}</td></tr>
-    <tr><th>Email</th><td>{{ profile[5] }}</td></tr>
-    <tr><th>Assigned Staff</th><td>{{ profile[6] }}</td></tr>
-    <tr><th>Outstanding Fee</th><td>₹{{ outstanding_fee }}</td></tr>
-</table>
-{% else %}
-<p>Profile not found.</p>
-{% endif %}
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-badge">KC</div>
+            <h2>Khans & Co.</h2>
+            <p>Client Portal</p>
+        </div>
 
-<br>
-<a href="/client-portal">Back to Client Portal</a>
+        <a class="nav-link" href="/client-portal">🏠 Portal Home</a>
+        <a class="nav-link active" href="/client-profile">👤 My Profile</a>
+        <a class="nav-link" href="/upload-document">📤 Upload Documents</a>
+        <a class="nav-link" href="/client-downloads">📥 Downloads</a>
+        <a class="nav-link" href="/client-tickets">🎫 Support Tickets</a>
+        <a class="nav-link logout-link" href="/client-logout">🚪 Logout</a>
+    </div>
+
+    <main class="main-content">
+
+        <div class="topbar">
+            <div>
+                <h1>👤 My Profile</h1>
+                <p>Your registered details with Khans & Co.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            {% if profile %}
+            <table class="table">
+                <tr><th>Client Code</th><td>{{ profile[1] }}</td></tr>
+                <tr><th>Client Name</th><td>{{ profile[2] }}</td></tr>
+                <tr><th>GSTIN</th><td>{{ profile[3] }}</td></tr>
+                <tr><th>Mobile</th><td>{{ profile[4] }}</td></tr>
+                <tr><th>Email</th><td>{{ profile[5] }}</td></tr>
+                <tr><th>Assigned Staff</th><td>{{ profile[6] }}</td></tr>
+                <tr><th>Outstanding Fee</th><td>₹{{ outstanding_fee }}</td></tr>
+            </table>
+            {% else %}
+            <p>Profile not found.</p>
+            {% endif %}
+        </div>
+
+    </main>
+
+</div>
 
 </body>
 </html>

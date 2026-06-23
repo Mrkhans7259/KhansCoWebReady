@@ -1,93 +1,125 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Client Portal</title>
+    <title>Client Portal - Khans & Co.</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body style="font-family:Arial; padding:30px; background:#f4f6f8;">
+<body>
 
-<h1>Client Portal</h1>
-<h3>Welcome, {{ client_name }}</h3>
+<div class="app-layout">
 
-<hr>
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-badge">KC</div>
+            <h2>Khans & Co.</h2>
+            <p>Client Portal</p>
+        </div>
 
-<h2>Menu</h2>
+        <a class="nav-link active" href="/client-portal">🏠 Portal Home</a>
+        <a class="nav-link" href="/client-profile">👤 My Profile</a>
+        <a class="nav-link" href="/upload-document">📤 Upload Documents</a>
+        <a class="nav-link" href="/client-downloads">📥 Downloads</a>
+        <a class="nav-link" href="/client-tickets">🎫 Support Tickets</a>
+        <a class="nav-link logout-link" href="/client-logout">🚪 Logout</a>
+    </div>
 
-<p><a href="/client-profile">👤 My Profile</a></p>
-<p><a href="/upload-document">📤 Upload Documents</a></p>
-<p><a href="/client-downloads">📥 My Download Files</a></p>
-<p><a href="/client-tickets">🎫 Support / Query Tickets</a></p>
-<p><a href="/client-logout">🚪 Logout</a></p>
+    <main class="main-content">
 
-<hr>
+        <div class="topbar">
+            <div>
+                <h1>Welcome, {{ client_name }}</h1>
+                <p>Track your filings, documents, and work progress.</p>
+            </div>
+            <div>
+                <strong>Client Portal</strong><br>
+                <small>Khans & Co.</small>
+            </div>
+        </div>
 
-<h2>📊 My Work Status</h2>
+        <div class="section">
+            <h2>📊 My Work Status</h2>
 
-{% if status %}
-<table border="1" cellpadding="10" cellspacing="0">
-    <tr>
-        <th>GST</th>
-        <th>Income Tax</th>
-        <th>TDS</th>
-        <th>Audit</th>
-        <th>ROC</th>
-        <th>Remarks</th>
-        <th>Updated</th>
-    </tr>
-    <tr>
-        <td>{{ status[0] }}</td>
-        <td>{{ status[1] }}</td>
-        <td>{{ status[2] }}</td>
-        <td>{{ status[3] }}</td>
-        <td>{{ status[4] }}</td>
-        <td>{{ status[5] }}</td>
-        <td>{{ status[6] }}</td>
-    </tr>
-</table>
-{% else %}
-<p>No status updated yet.</p>
-{% endif %}
+            {% if status %}
+            <table class="table">
+                <tr>
+                    <th>GST</th>
+                    <th>Income Tax</th>
+                    <th>TDS</th>
+                    <th>Audit</th>
+                    <th>ROC</th>
+                    <th>Remarks</th>
+                    <th>Updated</th>
+                </tr>
+                <tr>
+                    <td>{{ status[0] }}</td>
+                    <td>{{ status[1] }}</td>
+                    <td>{{ status[2] }}</td>
+                    <td>{{ status[3] }}</td>
+                    <td>{{ status[4] }}</td>
+                    <td>{{ status[5] }}</td>
+                    <td>{{ status[6] }}</td>
+                </tr>
+            </table>
+            {% else %}
+            <p>No status updated yet.</p>
+            {% endif %}
+        </div>
 
-<hr>
+        <div class="section">
+            <h2>⚡ Quick Actions</h2>
+            <div class="quick-actions">
+                <a class="action-btn" href="/upload-document">📤 Upload Document</a>
+                <a class="action-btn" href="/client-downloads">📥 Download Files</a>
+                <a class="action-btn" href="/client-tickets">🎫 Raise Ticket</a>
+                <a class="action-btn" href="/client-profile">👤 View Profile</a>
+            </div>
+        </div>
 
-<h2>My Work Progress</h2>
+        <div class="section">
+            <h2>📈 Work Progress</h2>
 
-<table border="1" cellpadding="10" cellspacing="0">
-    <tr>
-        <th>Work</th>
-        <th>Status</th>
-        <th>Remarks</th>
-        <th>Updated</th>
-    </tr>
+            <table class="table">
+                <tr>
+                    <th>Work</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                    <th>Updated</th>
+                </tr>
 
-    {% for row in progress %}
-    <tr>
-        <td>{{ row[0] }}</td>
-        <td>{{ row[1] }}</td>
-        <td>{{ row[2] }}</td>
-        <td>{{ row[3] }}</td>
-    </tr>
-    {% endfor %}
-</table>
+                {% for row in progress %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
 
-<hr>
+        <div class="section">
+            <h2>📤 Uploaded Documents</h2>
 
-<h2>My Uploaded Documents</h2>
+            <table class="table">
+                <tr>
+                    <th>Document</th>
+                    <th>File</th>
+                    <th>Uploaded</th>
+                </tr>
 
-<table border="1" cellpadding="10" cellspacing="0">
-    <tr>
-        <th>Document</th>
-        <th>File</th>
-        <th>Uploaded</th>
-    </tr>
+                {% for doc in documents %}
+                <tr>
+                    <td>{{ doc[0] }}</td>
+                    <td>{{ doc[1] }}</td>
+                    <td>{{ doc[2] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
 
-    {% for doc in documents %}
-    <tr>
-        <td>{{ doc[0] }}</td>
-        <td>{{ doc[1] }}</td>
-        <td>{{ doc[2] }}</td>
-    </tr>
-    {% endfor %}
-</table>
+    </main>
+
+</div>
 
 </body>
 </html>
