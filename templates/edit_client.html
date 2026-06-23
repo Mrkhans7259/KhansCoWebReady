@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Client</title>
+</head>
+<body style="font-family:Arial; background:#f4f6f8;">
+
+<div style="width:700px; margin:auto; margin-top:40px; background:white; padding:30px; border-radius:10px;">
+
+    <h1>✏️ Edit Client</h1>
+
+    <form method="POST">
+
+        <p>Client Code</p>
+        <input type="text" name="client_code" value="{{ client[1] }}" required
+               style="width:100%; padding:10px;">
+
+        <p>Client Name</p>
+        <input type="text" name="client_name" value="{{ client[2] }}" required
+               style="width:100%; padding:10px;">
+
+        <p>GSTIN</p>
+        <input type="text" name="gstin" value="{{ client[3] }}"
+               style="width:100%; padding:10px;">
+
+        <p>Mobile</p>
+        <input type="text" name="mobile" value="{{ client[4] }}"
+               style="width:100%; padding:10px;">
+
+        <p>Email</p>
+        <input type="email" name="email" value="{{ client[5] }}"
+               style="width:100%; padding:10px;">
+
+        <p>Assigned Staff</p>
+        <input type="text" name="assigned_staff" value="{{ client[6] }}"
+               style="width:100%; padding:10px;">
+
+        <br><br>
+
+        <button type="submit" style="padding:12px 30px;">
+            Update Client
+        </button>
+
+        <a href="/clients">Back</a>
+
+    </form>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Khans & Co Dashboard</title>
+</head>
+<body style="font-family:Arial; margin:0; background:#f4f6f8;">
+
+<div style="display:flex; min-height:100vh;">
+
+    <div style="width:230px; background:#1f2937; color:white; padding:20px;">
+        <h2>Khans & Co.</h2>
+        <p>Compliance Manager</p>
+        <hr>
+        <p>🏠 Dashboard</p>
+        <p>👥 Client Master</p>
+        <p>📊 GST Compliance</p>
+        <p>💰 Fee Tracker</p>
+        <p>🚪 Logout</p>
+    </div>
+
+    <div style="flex:1; padding:30px;">
+        <h1>🏠 Dashboard</h1>
+
+        <div style="display:flex; gap:20px; flex-wrap:wrap;">
+
+            <div style="background:white; padding:25px; width:220px; border-radius:10px;">
+                <h3>👥 Total Clients</h3>
+                <h1>{{ total_clients }}</h1>
+            </div>
+
+            <div style="background:white; padding:25px; width:220px; border-radius:10px;">
+                <h3>📊 GST Records</h3>
+                <h1>{{ total_gst }}</h1>
+            </div>
+
+            <div style="background:white; padding:25px; width:220px; border-radius:10px;">
+                <h3>📄 GSTR-1 Pending</h3>
+                <h1>{{ pending_gstr1 }}</h1>
+            </div>
+
+            <div style="background:white; padding:25px; width:220px; border-radius:10px;">
+                <h3>📄 GSTR-3B Pending</h3>
+                <h1>{{ pending_gstr3b }}</h1>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
