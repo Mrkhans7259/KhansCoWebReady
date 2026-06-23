@@ -1,89 +1,115 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard</title>
+    <title>Khans & Co. Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body style="font-family:Arial; margin:0; background:#f4f6f8;">
+<body>
 
-<div style="display:flex; min-height:100vh;">
+<div class="app-layout">
 
-    <div style="width:260px; background:#1f2937; color:white; padding:20px;">
-        <h2>Khans & Co.</h2>
-        <p>Compliance Manager</p>
-        <hr>
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-badge">KC</div>
+            <h2>Khans & Co.</h2>
+            <p>Compliance Manager</p>
+        </div>
 
-        <p><a href="/dashboard" style="color:white;">🏠 Dashboard</a></p>
-        <p><a href="/clients" style="color:white;">👥 Client Master</a></p>
-        <p><a href="/fee-tracker" style="color:white;">💰 Fee Tracker</a></p>
-        <p><a href="/client-ledger" style="color:white;">📄 Client Ledger</a></p>
-        <p><a href="/gst-status" style="color:white;">📊 GST Compliance</a></p>
-        <p><a href="/invoice-generator" style="color:white;">🧾 Invoice Generator</a></p>
-        <p><a href="/reports" style="color:white;">📈 Reports</a></p>
-        <p><a href="/notifications" style="color:white;">🔔 Notifications</a></p>
-        <p><a href="/admin-tickets" style="color:white;">🎫 Tickets</a></p>
-        <p><a href="/admin-documents" style="color:white;">📤 Documents</a></p>
-        <p><a href="/file-center" style="color:white;">📂 File Center</a></p>
-        <p><a href="/status-tracker" style="color:white;">📊 Status Tracker</a></p>
-        <p><a href="/users" style="color:white;">👤 Users</a></p>
-        <p><a href="/backup-center" style="color:white;">🔄 Backup</a></p>
-        <p><a href="/logout" style="color:white;">🚪 Logout</a></p>
+        <a class="nav-link active" href="/dashboard">🏠 Dashboard</a>
+        <a class="nav-link" href="/clients">👥 Client Master</a>
+        <a class="nav-link" href="/fee-tracker">💰 Fee Tracker</a>
+        <a class="nav-link" href="/client-ledger">📄 Client Ledger</a>
+        <a class="nav-link" href="/gst-status">📊 GST Compliance</a>
+        <a class="nav-link" href="/invoice-generator">🧾 Invoice Generator</a>
+        <a class="nav-link" href="/reports">📈 Reports</a>
+        <a class="nav-link" href="/notifications">🔔 Notifications</a>
+        <a class="nav-link" href="/admin-tickets">🎫 Tickets</a>
+        <a class="nav-link" href="/admin-documents">📤 Documents</a>
+        <a class="nav-link" href="/file-center">📂 File Center</a>
+        <a class="nav-link" href="/status-tracker">📊 Status Tracker</a>
+        <a class="nav-link" href="/users">👤 Users</a>
+        <a class="nav-link" href="/backup-center">🔄 Backup</a>
+        <a class="nav-link logout-link" href="/logout">🚪 Logout</a>
     </div>
 
-    <div style="flex:1; padding:30px;">
-        <h1>🏠 Dashboard</h1>
+    <main class="main-content">
 
-        <h2>🔔 Notification Summary</h2>
+        <div class="topbar">
+            <div>
+                <h1>🏠 Dashboard</h1>
+                <p>Welcome back. Here is your compliance overview.</p>
+            </div>
 
-        <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:25px;">
+            <div>
+                <strong>Khans & Co.</strong><br>
+                <small>Smart Compliance. Strong Business.</small>
+            </div>
+        </div>
 
-            <div style="background:white; padding:20px; width:220px; border-radius:10px;">
+        <div class="card-grid">
+            <div class="card blue">
                 <h3>🔔 Unread Notifications</h3>
                 <h1>{{ unread_notifications }}</h1>
             </div>
 
-            <div style="background:white; padding:20px; width:220px; border-radius:10px;">
+            <div class="card yellow">
                 <h3>🎫 Open Tickets</h3>
                 <h1>{{ open_tickets }}</h1>
             </div>
 
-            <div style="background:white; padding:20px; width:220px; border-radius:10px;">
+            <div class="card green">
                 <h3>📤 Uploaded Documents</h3>
                 <h1>{{ uploaded_documents }}</h1>
             </div>
 
-            <div style="background:white; padding:20px; width:220px; border-radius:10px;">
+            <div class="card purple">
                 <h3>👤 Client Registrations</h3>
                 <h1>{{ registered_clients }}</h1>
             </div>
-
         </div>
 
-        <h2>📊 Business Summary</h2>
+        <div class="section">
+            <h2>📊 Business Summary</h2>
 
-        <div style="display:flex; gap:20px; flex-wrap:wrap;">
+            <div class="card-grid">
+                <div class="card">
+                    <h3>👥 Total Clients</h3>
+                    <h1>{{ total_clients }}</h1>
+                </div>
 
-            <div style="background:white; padding:20px; width:220px; border-radius:10px;">
-                <h3>👥 Total Clients</h3>
-                <h1>{{ total_clients }}</h1>
+                <div class="card">
+                    <h3>📊 GST Records</h3>
+                    <h1>{{ total_gst }}</h1>
+                </div>
+
+                <div class="card">
+                    <h3>📄 GSTR-1 Pending</h3>
+                    <h1>{{ pending_gstr1 }}</h1>
+                </div>
+
+                <div class="card">
+                    <h3>📄 GSTR-3B Pending</h3>
+                    <h1>{{ pending_gstr3b }}</h1>
+                </div>
             </div>
-
-            <div style="background:white; padding:20px; width:220px; border-radius:10px;">
-                <h3>📊 GST Records</h3>
-                <h1>{{ total_gst }}</h1>
-            </div>
-
-            <div style="background:white; padding:20px; width:220px; border-radius:10px;">
-                <h3>📄 GSTR-1 Pending</h3>
-                <h1>{{ pending_gstr1 }}</h1>
-            </div>
-
-            <div style="background:white; padding:20px; width:220px; border-radius:10px;">
-                <h3>📄 GSTR-3B Pending</h3>
-                <h1>{{ pending_gstr3b }}</h1>
-            </div>
-
         </div>
-    </div>
+
+        <div class="section">
+            <h2>⚡ Quick Actions</h2>
+
+            <div class="quick-actions">
+                <a class="action-btn" href="/add-client">➕ Add Client</a>
+                <a class="action-btn" href="/file-center">📂 Upload File</a>
+                <a class="action-btn" href="/invoice-generator">🧾 Generate Invoice</a>
+                <a class="action-btn" href="/reports">📈 View Reports</a>
+                <a class="action-btn" href="/work-progress">📊 Work Progress</a>
+                <a class="action-btn" href="/status-tracker">✅ Status Tracker</a>
+                <a class="action-btn" href="/whatsapp-center">💬 WhatsApp</a>
+                <a class="action-btn" href="/backup-center">🔄 Backup Now</a>
+            </div>
+        </div>
+
+    </main>
 
 </div>
 

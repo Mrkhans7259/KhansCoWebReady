@@ -1,0 +1,291 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #0f172a;
+}
+
+a {
+    text-decoration: none;
+}
+
+.login-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #061936, #0f2f5f);
+}
+
+.login-card {
+    width: 420px;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    text-align: center;
+}
+
+.logo-badge {
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #f7c948, #b7791f);
+    color: #061936;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.login-card h1 {
+    margin: 10px 0 5px;
+}
+
+.login-card p {
+    color: #64748b;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.login-card button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #0f2f5f;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-links {
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 270px;
+    background: linear-gradient(180deg, #061936, #020617);
+    color: white;
+    padding: 22px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+.sidebar-logo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.sidebar-logo .logo-badge {
+    width: 70px;
+    height: 70px;
+    font-size: 30px;
+}
+
+.sidebar-logo h2 {
+    margin: 8px 0 0;
+    color: #f7c948;
+    letter-spacing: 1px;
+}
+
+.sidebar-logo p {
+    margin: 4px 0;
+    color: #cbd5e1;
+    font-size: 13px;
+}
+
+.nav-link {
+    display: block;
+    color: #e2e8f0;
+    padding: 11px 14px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: #1d4ed8;
+    color: #ffffff;
+}
+
+.logout-link {
+    background: rgba(220, 38, 38, 0.25);
+    color: white;
+    margin-top: 20px;
+}
+
+.main-content {
+    margin-left: 270px;
+    padding: 30px;
+    width: calc(100% - 270px);
+}
+
+.topbar {
+    background: white;
+    padding: 18px 24px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.topbar h1 {
+    margin: 0;
+}
+
+.topbar p {
+    margin: 5px 0 0;
+    color: #64748b;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(180px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+}
+
+.card h3 {
+    margin: 0 0 15px;
+    color: #334155;
+    font-size: 15px;
+}
+
+.card h1 {
+    margin: 0;
+    font-size: 34px;
+}
+
+.card.blue {
+    border: 1px solid #bfdbfe;
+    background: linear-gradient(135deg, #eff6ff, #ffffff);
+}
+
+.card.green {
+    border: 1px solid #bbf7d0;
+    background: linear-gradient(135deg, #f0fdf4, #ffffff);
+}
+
+.card.yellow {
+    border: 1px solid #fde68a;
+    background: linear-gradient(135deg, #fffbeb, #ffffff);
+}
+
+.card.purple {
+    border: 1px solid #e9d5ff;
+    background: linear-gradient(135deg, #faf5ff, #ffffff);
+}
+
+.section {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    margin-bottom: 25px;
+}
+
+.section h2 {
+    margin-top: 0;
+}
+
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(120px, 1fr));
+    gap: 15px;
+}
+
+.action-btn {
+    padding: 18px;
+    border-radius: 14px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    color: #0f172a;
+    font-weight: bold;
+}
+
+.action-btn:hover {
+    background: #eff6ff;
+    border-color: #93c5fd;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.table th {
+    background: #f8fafc;
+    color: #334155;
+    text-align: left;
+}
+
+.table th,
+.table td {
+    border-bottom: 1px solid #e2e8f0;
+    padding: 12px;
+}
+
+@media (max-width: 900px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .app-layout {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .card-grid,
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .topbar {
+        display: block;
+    }
+}
