@@ -2,3 +2,4 @@ Flask
 gunicorn
 Werkzeug
 python-dotenv
+openpyxl
