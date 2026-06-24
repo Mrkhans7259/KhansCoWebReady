@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Import Clients</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="main-content" style="margin-left:0; width:100%;">
+    <div class="topbar">
+        <div>
+            <h1>📥 Import Clients from Excel</h1>
+            <p>Upload Excel file with client details.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <form method="POST" enctype="multipart/form-data">
+            <p>Excel Format:</p>
+            <pre>client_code | client_name | gstin | mobile | email | assigned_staff</pre>
+
+            <input type="file" name="excel_file" required>
+            <br><br>
+            <button type="submit">Upload & Import</button>
+        </form>
+
+        {% if message %}
+            <h3>{{ message }}</h3>
+        {% endif %}
+    </div>
+
+    <a href="/dashboard">Back to Dashboard</a>
+</div>
+
+</body>
+</html>

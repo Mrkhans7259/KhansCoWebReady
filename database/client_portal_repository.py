@@ -52,27 +52,48 @@ class ClientPortalRepository:
             )
         """)
 
+        self.cursor.execute("""
+            CREATE TABLE IF NOT EXISTS client_profile_photos (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                client_id INTEGER UNIQUE,
+                file_name TEXT,
+                uploaded_date TEXT
+            )
+        """)
+
+        self.ensure_clients_extra_columns()
+
         self.conn.commit()
+
+    def ensure_clients_extra_columns(self):
+        self.cursor.execute("PRAGMA table_info(clients)")
+        columns = [col[1] for col in self.cursor.fetchall()]
+
+        if "pan" not in columns:
+            self.cursor.execute("ALTER TABLE clients ADD COLUMN pan TEXT")
 
     def hash_password(self, password):
         return hashlib.sha256(password.encode()).hexdigest()
 
-    def register_client(self, client_name, mobile, email, username, password):
+    def register_client(self, client_name, mobile, email, username, password, pan="", gstin=""):
+        self.ensure_clients_extra_columns()
+
         self.cursor.execute("""
-            INSERT INTO clients
-            (
+            INSERT INTO clients (
                 client_code,
                 client_name,
                 gstin,
+                pan,
                 mobile,
                 email,
                 assigned_staff
             )
-            VALUES (?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         """, (
             username,
             client_name,
-            "",
+            gstin,
+            pan,
             mobile,
             email,
             ""
@@ -81,8 +102,7 @@ class ClientPortalRepository:
         client_id = self.cursor.lastrowid
 
         self.cursor.execute("""
-            INSERT INTO client_logins
-            (
+            INSERT INTO client_logins (
                 client_id,
                 username,
                 password
@@ -95,8 +115,7 @@ class ClientPortalRepository:
         ))
 
         self.cursor.execute("""
-            INSERT INTO notifications
-            (
+            INSERT INTO notifications (
                 message,
                 status,
                 created_date
@@ -128,8 +147,7 @@ class ClientPortalRepository:
 
     def save_document(self, client_id, document_name, file_name):
         self.cursor.execute("""
-            INSERT INTO client_documents
-            (
+            INSERT INTO client_documents (
                 client_id,
                 document_name,
                 file_name,
@@ -140,6 +158,19 @@ class ClientPortalRepository:
             client_id,
             document_name,
             file_name,
+            datetime.now().strftime("%d-%m-%Y %H:%M")
+        ))
+
+        self.cursor.execute("""
+            INSERT INTO notifications (
+                message,
+                status,
+                created_date
+            )
+            VALUES (?, ?, ?)
+        """, (
+            f"New document uploaded by client ID {client_id}: {document_name}",
+            "Unread",
             datetime.now().strftime("%d-%m-%Y %H:%M")
         ))
 
@@ -184,8 +215,7 @@ class ClientPortalRepository:
 
     def add_work_progress(self, client_id, work_title, status, remarks):
         self.cursor.execute("""
-            INSERT INTO work_progress
-            (
+            INSERT INTO work_progress (
                 client_id,
                 work_title,
                 status,
@@ -238,3 +268,52 @@ class ClientPortalRepository:
         """, (notification_id,))
 
         self.conn.commit()
+
+    def save_profile_photo(self, client_id, file_name):
+        self.cursor.execute("""
+            SELECT id
+            FROM client_profile_photos
+            WHERE client_id = ?
+        """, (client_id,))
+
+        existing = self.cursor.fetchone()
+
+        if existing:
+            self.cursor.execute("""
+                UPDATE client_profile_photos
+                SET file_name = ?, uploaded_date = ?
+                WHERE client_id = ?
+            """, (
+                file_name,
+                datetime.now().strftime("%d-%m-%Y %H:%M"),
+                client_id
+            ))
+        else:
+            self.cursor.execute("""
+                INSERT INTO client_profile_photos (
+                    client_id,
+                    file_name,
+                    uploaded_date
+                )
+                VALUES (?, ?, ?)
+            """, (
+                client_id,
+                file_name,
+                datetime.now().strftime("%d-%m-%Y %H:%M")
+            ))
+
+        self.conn.commit()
+
+    def get_profile_photo(self, client_id):
+        self.cursor.execute("""
+            SELECT file_name
+            FROM client_profile_photos
+            WHERE client_id = ?
+        """, (client_id,))
+
+        result = self.cursor.fetchone()
+
+        if result:
+            return result[0]
+
+        return None

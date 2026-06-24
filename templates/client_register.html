@@ -4,19 +4,81 @@
     <title>Client Register - Khans & Co.</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
+
 <body class="login-body">
 
 <div class="login-card">
     <div class="logo-badge">KC</div>
+
     <h1>Client Register</h1>
     <p>Create your client portal account</p>
 
-    <form method="POST">
-        <input name="client_name" placeholder="Client Name" required>
-        <input name="mobile" placeholder="Mobile Number" required>
-        <input name="email" placeholder="Email">
-        <input name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
+    <form method="POST" onsubmit="return validateForm()">
+
+        <input
+            name="client_name"
+            placeholder="Client Name"
+            required
+        >
+
+        <input
+            type="tel"
+            name="mobile"
+            id="mobile"
+            placeholder="Mobile Number"
+            maxlength="10"
+            inputmode="numeric"
+            required
+            oninput="validateMobile(this)"
+        >
+
+        <small id="mobile-error" style="display:none;color:red;text-align:left;">
+            Enter valid 10 digit mobile number starting with 6, 7, 8 or 9.
+        </small>
+
+        <input
+            name="email"
+            type="email"
+            placeholder="Email"
+        >
+
+        <input
+            type="text"
+            name="pan"
+            id="pan"
+            placeholder="PAN Optional e.g. ABCDE1234F"
+            maxlength="10"
+            style="text-transform:uppercase;"
+            oninput="validatePAN(this)"
+        >
+
+        <small id="pan-error" style="display:none;color:red;text-align:left;">
+            Invalid PAN format. Example: ABCDE1234F
+        </small>
+
+        <input
+            type="text"
+            name="gstin"
+            id="gstin"
+            placeholder="GSTIN Optional"
+            maxlength="15"
+            style="text-transform:uppercase;"
+            oninput="this.value=this.value.toUpperCase()"
+        >
+
+        <input
+            name="username"
+            placeholder="Username"
+            required
+        >
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+        >
+
         <button type="submit">Register</button>
     </form>
 
@@ -25,6 +87,64 @@
         <a href="/client-login">Client Login</a>
     </div>
 </div>
+
+<script>
+function validateMobile(field) {
+    field.value = field.value.replace(/[^0-9]/g, "").slice(0, 10);
+
+    const mobilePattern = /^[6-9][0-9]{9}$/;
+    const error = document.getElementById("mobile-error");
+
+    if (field.value.length === 0) {
+        error.style.display = "none";
+        field.style.border = "";
+        return false;
+    }
+
+    if (mobilePattern.test(field.value)) {
+        error.style.display = "none";
+        field.style.border = "2px solid green";
+        return true;
+    } else {
+        error.style.display = "block";
+        field.style.border = "2px solid red";
+        return false;
+    }
+}
+
+function validatePAN(field) {
+    field.value = field.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 10);
+
+    const panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+    const error = document.getElementById("pan-error");
+
+    if (field.value.length === 0) {
+        error.style.display = "none";
+        field.style.border = "";
+        return true;
+    }
+
+    if (panPattern.test(field.value)) {
+        error.style.display = "none";
+        field.style.border = "2px solid green";
+        return true;
+    } else {
+        error.style.display = "block";
+        field.style.border = "2px solid red";
+        return false;
+    }
+}
+
+function validateForm() {
+    const mobile = document.getElementById("mobile");
+    const pan = document.getElementById("pan");
+
+    const isMobileValid = validateMobile(mobile);
+    const isPANValid = validatePAN(pan);
+
+    return isMobileValid && isPANValid;
+}
+</script>
 
 </body>
 </html>

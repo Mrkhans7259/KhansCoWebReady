@@ -1,51 +1,225 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Profile - Khans & Co.</title>
+    <title>Client Portal - Khans & Co.</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
+
 <body>
 
 <div class="app-layout">
 
+    <!-- Sidebar -->
     <div class="sidebar">
+
         <div class="sidebar-logo">
             <div class="logo-badge">KC</div>
             <h2>Khans & Co.</h2>
             <p>Client Portal</p>
         </div>
 
-        <a class="nav-link" href="/client-portal">🏠 Portal Home</a>
-        <a class="nav-link active" href="/client-profile">👤 My Profile</a>
-        <a class="nav-link" href="/upload-document">📤 Upload Documents</a>
-        <a class="nav-link" href="/client-downloads">📥 Downloads</a>
-        <a class="nav-link" href="/client-tickets">🎫 Support Tickets</a>
-        <a class="nav-link logout-link" href="/client-logout">🚪 Logout</a>
+        <a class="nav-link active" href="/client-portal">
+            🏠 Dashboard
+        </a>
+
+        <a class="nav-link" href="/client-profile">
+            👤 My Profile
+        </a>
+
+        <a class="nav-link" href="/client-profile-photo">
+            📸 Profile Photo
+        </a>
+
+        <a class="nav-link" href="/upload-document">
+            📤 Upload Documents
+        </a>
+
+        <a class="nav-link" href="/client-downloads">
+            📥 Downloads
+        </a>
+
+        <a class="nav-link" href="/client-tickets">
+            🎫 Support Tickets
+        </a>
+
+        <a class="nav-link logout-link" href="/client-logout">
+            🚪 Logout
+        </a>
+
     </div>
 
+    <!-- Main Content -->
     <main class="main-content">
 
+        <!-- Top Bar -->
         <div class="topbar">
+
             <div>
-                <h1>👤 My Profile</h1>
-                <p>Your registered details with Khans & Co.</p>
+                <h1>Welcome, {{ client_name }}</h1>
+                <p>Khans & Co. Premium Client Portal</p>
             </div>
+
+            <div>
+
+                {% if profile_photo %}
+                    <img
+                        src="/profile-photos/{{ profile_photo }}"
+                        style="
+                            width:80px;
+                            height:80px;
+                            border-radius:50%;
+                            object-fit:cover;
+                            border:3px solid #0f172a;
+                        "
+                    >
+                {% else %}
+                    <div
+                        style="
+                            width:80px;
+                            height:80px;
+                            border-radius:50%;
+                            background:#e5e7eb;
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            font-size:30px;
+                        ">
+                        👤
+                    </div>
+                {% endif %}
+
+            </div>
+
         </div>
 
+        <!-- Quick Actions -->
+
         <div class="section">
-            {% if profile %}
+
+            <h2>⚡ Quick Actions</h2>
+
+            <div class="quick-actions">
+
+                <a class="action-btn" href="/client-profile">
+                    👤 My Profile
+                </a>
+
+                <a class="action-btn" href="/client-profile-photo">
+                    📸 Upload Photo
+                </a>
+
+                <a class="action-btn" href="/upload-document">
+                    📤 Upload Document
+                </a>
+
+                <a class="action-btn" href="/client-downloads">
+                    📥 Download Files
+                </a>
+
+                <a class="action-btn" href="/client-tickets">
+                    🎫 Raise Ticket
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Compliance Status -->
+
+        <div class="section">
+
+            <h2>📊 Compliance Status</h2>
+
+            {% if status %}
+
             <table class="table">
-                <tr><th>Client Code</th><td>{{ profile[1] }}</td></tr>
-                <tr><th>Client Name</th><td>{{ profile[2] }}</td></tr>
-                <tr><th>GSTIN</th><td>{{ profile[3] }}</td></tr>
-                <tr><th>Mobile</th><td>{{ profile[4] }}</td></tr>
-                <tr><th>Email</th><td>{{ profile[5] }}</td></tr>
-                <tr><th>Assigned Staff</th><td>{{ profile[6] }}</td></tr>
-                <tr><th>Outstanding Fee</th><td>₹{{ outstanding_fee }}</td></tr>
+
+                <tr>
+                    <th>GST</th>
+                    <th>Income Tax</th>
+                    <th>TDS</th>
+                    <th>Audit</th>
+                    <th>ROC</th>
+                    <th>Remarks</th>
+                    <th>Updated</th>
+                </tr>
+
+                <tr>
+                    <td>{{ status[0] }}</td>
+                    <td>{{ status[1] }}</td>
+                    <td>{{ status[2] }}</td>
+                    <td>{{ status[3] }}</td>
+                    <td>{{ status[4] }}</td>
+                    <td>{{ status[5] }}</td>
+                    <td>{{ status[6] }}</td>
+                </tr>
+
             </table>
+
             {% else %}
-            <p>Profile not found.</p>
+
+            <p>No compliance status available.</p>
+
             {% endif %}
+
+        </div>
+
+        <!-- Work Progress -->
+
+        <div class="section">
+
+            <h2>📈 Work Progress</h2>
+
+            <table class="table">
+
+                <tr>
+                    <th>Work</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                    <th>Updated</th>
+                </tr>
+
+                {% for row in progress %}
+
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+        <!-- Uploaded Documents -->
+
+        <div class="section">
+
+            <h2>📂 Uploaded Documents</h2>
+
+            <table class="table">
+
+                <tr>
+                    <th>Document</th>
+                    <th>File</th>
+                    <th>Date</th>
+                </tr>
+
+                {% for doc in documents %}
+
+                <tr>
+                    <td>{{ doc[0] }}</td>
+                    <td>{{ doc[1] }}</td>
+                    <td>{{ doc[2] }}</td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
         </div>
 
     </main>

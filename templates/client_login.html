@@ -4,23 +4,62 @@
     <title>Client Login - Khans & Co.</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
+
 <body class="login-body">
 
 <div class="login-card">
+
     <div class="logo-badge">KC</div>
+
     <h1>Client Login</h1>
-    <p>Khans & Co. Client Portal</p>
+    <p>Khans & Co. Premium Client Portal</p>
 
     <form method="POST">
-        <input name="username" placeholder="Client Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Login</button>
+
+        <input
+            name="username"
+            placeholder="Client Username"
+            required
+        >
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+        >
+
+        <button type="submit">
+            Login
+        </button>
+
     </form>
 
-    <div class="login-links">
-        <a href="/">Admin Login</a>
-        <a href="/client-register">Register</a>
+    <div style="margin-top:15px;text-align:center;">
+        <a
+            href="/client-forgot-password"
+            style="
+                color:#dc2626;
+                font-weight:bold;
+                text-decoration:none;
+            "
+        >
+            Forgot Password?
+        </a>
     </div>
+
+    <div class="login-links">
+
+        <a href="/">
+            Admin Login
+        </a>
+
+        <a href="/client-register">
+            Register
+        </a>
+
+    </div>
+
 </div>
 
 </body>

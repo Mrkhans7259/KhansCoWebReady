@@ -10,11 +10,14 @@
 
     <div class="sidebar">
         <div class="sidebar-logo">
-            <d<img src="/static/img/logo.png" style="width:170px; margin-bottom:10px;">
-<p>Compliance Manager</p>
+            <div class="logo-badge">KC</div>
+            <h2>Khans & Co.</h2>
+            <p>Compliance Manager</p>
+        </div>
 
         <a class="nav-link active" href="/dashboard">🏠 Dashboard</a>
         <a class="nav-link" href="/clients">👥 Client Master</a>
+        <a class="nav-link" href="/import-clients">📥 Import Clients</a>
         <a class="nav-link" href="/fee-tracker">💰 Fee Tracker</a>
         <a class="nav-link" href="/client-ledger">📄 Client Ledger</a>
         <a class="nav-link" href="/gst-status">📊 GST Compliance</a>
@@ -25,7 +28,11 @@
         <a class="nav-link" href="/admin-documents">📤 Documents</a>
         <a class="nav-link" href="/file-center">📂 File Center</a>
         <a class="nav-link" href="/status-tracker">📊 Status Tracker</a>
-        <a class="nav-link" href="/users">👤 Users</a>
+
+        {% if role == "Admin" %}
+            <a class="nav-link" href="/users">👤 User Management</a>
+        {% endif %}
+
         <a class="nav-link" href="/backup-center">🔄 Backup</a>
         <a class="nav-link logout-link" href="/logout">🚪 Logout</a>
     </div>
@@ -35,7 +42,7 @@
         <div class="topbar">
             <div>
                 <h1>🏠 Dashboard</h1>
-                <p>Welcome back. Here is your compliance overview.</p>
+                <p>Welcome {{ username }} | Role: {{ role }}</p>
             </div>
 
             <div>
@@ -97,13 +104,17 @@
 
             <div class="quick-actions">
                 <a class="action-btn" href="/add-client">➕ Add Client</a>
+                <a class="action-btn" href="/import-clients">📥 Import Clients</a>
                 <a class="action-btn" href="/file-center">📂 Upload File</a>
                 <a class="action-btn" href="/invoice-generator">🧾 Generate Invoice</a>
                 <a class="action-btn" href="/reports">📈 View Reports</a>
                 <a class="action-btn" href="/work-progress">📊 Work Progress</a>
                 <a class="action-btn" href="/status-tracker">✅ Status Tracker</a>
                 <a class="action-btn" href="/whatsapp-center">💬 WhatsApp</a>
-                <a class="action-btn" href="/backup-center">🔄 Backup Now</a>
+
+                {% if role == "Admin" %}
+                    <a class="action-btn" href="/users">👤 User Management</a>
+                {% endif %}
             </div>
         </div>
 
